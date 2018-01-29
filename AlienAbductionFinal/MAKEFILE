@@ -1,0 +1,51 @@
+all:
+	make clean
+	make invasion
+
+clean:
+	!Rm *.o
+	
+kybdisr.o:	kybdisr.s
+	gen -L2 kybdisr.s
+    
+kybd.o:	kybd.c kybd.h
+	cc68x -g -c kybd.c
+    
+rast2.o:	rast2.s
+	gen -L2 rast2.s
+	
+VBL2.o:		VBL2.s
+	gen -L2 VBL2.s
+
+setipl.o:   setipl.s
+	gen -L2 setipl.s    
+    
+invasion:	invasion.o setipl.o vbl.o kybd.o rast2.o kybdisr.o VBL2.o model.o input.o renderer.o rast.o events.o psg.o effects.o
+	cc68x -g invasion.o setipl.o vbl.o kybd.o rast2.o kybdisr.o VBL2.o model.o input.o renderer.o rast.o events.o psg.o effects.o -o invasion
+    
+invasion.o:	invasion.c invasion.h
+	cc68x -g -c invasion.c
+
+vbl.o:	vbl.c vbl.h
+	cc68x -g -c vbl.c
+	
+model.o:	model.c model.h
+	cc68x -g -c model.c    
+	
+input.o:	input.c input.h
+	cc68x -g -c input.c
+
+renderer.o:	renderer.c render.h
+	cc68x -g -c renderer.c
+	
+events.o:	events.c events.h
+	cc68x -g -c events.c	
+
+rast.o:	rast.c rast.h
+	cc68x -g -c rast.c
+	
+psg.o:	psg.c psg.h
+	cc68x -g -c psg.c
+	
+effects.o:	effects.c effects.h
+	cc68x -g -c effects.c
