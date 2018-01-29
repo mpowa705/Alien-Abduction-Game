@@ -1,0 +1,22 @@
+all:
+	make clean
+	make test
+
+clean:
+	!Rm *.o
+
+test:	renderer.o model.o rast.o events.o
+	cc68x -g renderer.o model.o rast.o events.o -o test
+
+model.o:	model.c model.h
+	cc68x -g -c model.c
+
+renderer.o:	renderer.c render.h
+	cc68x -g -c renderer.c
+	
+events.o:	events.c events.h
+	cc68x -g -c events.c	
+
+rast.o:	rast.c rast.h
+	cc68x -g -c rast.c
+	

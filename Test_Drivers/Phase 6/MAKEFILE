@@ -1,0 +1,28 @@
+all:
+	make clean
+	make invasion
+
+clean:
+	!Rm *.o
+
+invasion:	invasion.o input.o renderer.o model.o rast.o events.o
+	cc68x -g invasion.o input.o renderer.o model.o rast.o events.o -o invasion
+
+invasion.o:	invasion.c invasion.h
+	cc68x -g -c invasion.c
+
+input.o:	input.c input.h
+	cc68x -g -c input.c
+	
+model.o:	model.c model.h
+	cc68x -g -c model.c
+
+renderer.o:	renderer.c render.h
+	cc68x -g -c renderer.c
+	
+events.o:	events.c events.h
+	cc68x -g -c events.c	
+
+rast.o:	rast.c rast.h
+	cc68x -g -c rast.c
+	

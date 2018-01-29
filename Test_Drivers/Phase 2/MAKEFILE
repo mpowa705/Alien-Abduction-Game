@@ -1,0 +1,8 @@
+rasta:	rast.o test.o
+	cc68x -g rast.o test.o -o rasta
+
+rast.o:	rast.c rast.h
+	cc68x -g -c rast.c
+
+test.o:	test.c rast.h
+	cc68x -g -c test.c
